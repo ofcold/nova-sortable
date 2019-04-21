@@ -2,6 +2,10 @@
 
 namespace Ofcold\NovaSortable;
 
+
+use Illuminate\Database\Eloquent\Builder;
+
+
 trait SortableTrait
 {
 	/*
