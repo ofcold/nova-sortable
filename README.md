@@ -1,6 +1,6 @@
 # Nova sortable
 
-> Adds sorting functionality to the Laravel Nova's index resource
+> Adds sorting functionality to Laravel Nova's index resource
 
 
 ## Installing
@@ -10,7 +10,7 @@ composer require ofcold/nova-sortable
 ```
 
 
-## Useing
+## Using
 
 - Add a sort field to your database migrations file.
 
@@ -73,7 +73,7 @@ class Example extends Resource
 ```
 
 
-## Change sort field name.
+## Change sort field name
 
 > You only need to change the method 'orderColumnName' in your entry.
 
