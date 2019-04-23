@@ -160,6 +160,8 @@ export default {
 					this.__('The new order has been set!'),
 					{type: 'success'}
 				);
+				
+				this.$router.go(this.$router.currentRoute)
 			}
 			catch(e) {
 				this.$toasted.show(
