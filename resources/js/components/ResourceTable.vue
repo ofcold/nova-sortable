@@ -42,6 +42,7 @@
 				:key="resource.id.value"
 				:delete-resource="deleteResource"
 				:restore-resource="restoreResource"
+				:disabled-sort="disabledSort"
 				is="resource-table-row"
 				:resource="resource"
 				:resource-name="resourceName"
@@ -115,6 +116,7 @@ export default {
 			selectAllMatching: false,
 			getResourcesForProps: this.resources,
 			resourceCount: null,
+			disabledSort: false,
 		}
 	},
 
@@ -149,6 +151,7 @@ export default {
 		},
 
 		async updatedSortable(event) {
+			this.disabledSort = true
 			let items = btoa(JSON.stringify(
 				this.getResourcesForProps.map((item, key) => {
 					return {
@@ -169,7 +172,8 @@ export default {
 					{type: 'success'}
 				);
 
-				this.$router.go(this.$router.currentRoute)
+				this.disabledSort = false
+				// this.$router.go(this.$router.currentRoute)
 			}
 			catch(e) {
 				this.$toasted.show(
