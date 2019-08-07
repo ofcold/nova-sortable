@@ -47,7 +47,7 @@ class Example extends Resource
 	 */
 	public static function indexQuery(NovaRequest $request, $query)
 	{
-		$query->when(empty($request->get('orderBy')), function (Builder $q) {
+		$query->when(empty($request->get('orderBy')), function ($q) {
 			$q->getQuery()->orders = [];
 			return $q->orderBy(static::$model::orderColumnName());
 		});
