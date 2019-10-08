@@ -46,6 +46,15 @@
 		</td>
 
 		<td class="td-fit text-right pr-6">
+			<!-- Actions Menu -->
+			<inline-action-selector
+				v-if="availableActions.length > 0"
+				class="mr-3"
+				:resource="resource"
+				:resource-name="resourceName"
+			    :actions="availableActions"
+			/>
+
 			<!-- View Resource Link -->
 			<span v-if="resource.authorizedToView">
 				<router-link
@@ -134,8 +143,10 @@
 				<icon type="restore" with="20" height="21" />
 			</button>
 
-			<portal to="modals">
-				<transition name="fade">
+			<portal
+					to="modals"
+					transition="fade-transition"
+					v-if="deleteModalOpen || restoreModalOpen">
 					<delete-resource-modal
 						v-if="deleteModalOpen"
 						@confirm="confirmDelete"
@@ -151,9 +162,7 @@
 							</p>
 						</div>
 					</delete-resource-modal>
-				</transition>
 
-				<transition name="fade">
 					<restore-resource-modal
 						v-if="restoreModalOpen"
 						@confirm="confirmRestore"
@@ -166,7 +175,6 @@
 							</p>
 						</div>
 					</restore-resource-modal>
-				</transition>
 			</portal>
 		</td>
 	</tr>
@@ -191,12 +199,19 @@ export default {
 		'actionsAreAvailable',
 		'shouldShowCheckboxes',
 		'updateSelectionStatus',
+		'queryString',
 	],
 
 	data: () => ({
 		deleteModalOpen: false,
 		restoreModalOpen: false,
 	}),
+
+	computed: {
+		availableActions() {
+			return _.filter(this.resource.actions, a => a.showOnTableRow)
+		},
+	},
 
 	methods: {
 		/**
