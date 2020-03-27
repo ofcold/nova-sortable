@@ -156,7 +156,7 @@ export default {
 				this.getResourcesForProps.map((item, key) => {
 					return {
 						id: item.id.value,
-						sort_order: 11000 + key,
+						sort_order: 1 + key,
 					}
 				})
 			))
